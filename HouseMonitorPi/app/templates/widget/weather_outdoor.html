@@ -1,0 +1,25 @@
+<section class="widget">
+    <header>
+        <h3>室外天气<small>  (更新于：{{current_time}})</small></h3>
+    </header>
+    <div class="body">
+        <table class="table table-striped no-margin">
+            <thead>
+            <tr>
+                <th>温度</th>
+                <th>湿度</th>
+                <th>空气</th>
+                <th>风力</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong class="color-orange">{{weather_outdoor['tmp']}}</strong></td>
+                <td><strong class="color-blue">{{weather_outdoor['hum']}}</strong></td>
+                <td><strong class="color-green">{{weather_outdoor['aqi']}}</strong></td>
+                <td><strong class="color-teal">{{weather_outdoor['wind']}}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

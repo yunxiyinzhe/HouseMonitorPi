@@ -1,0 +1,80 @@
+{% block doc -%}
+<!DOCTYPE html>
+<html{% block html_attribs %}{% endblock html_attribs %}>
+{%- block html %}
+  <head>
+    {%- block head %}
+    <title>{% block title %}Dylan Gao{% endblock title %}</title>
+
+    {%- block metas %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%- endblock metas %}
+
+    {%- block styles %}
+    <link rel="icon" href="{{ url_for('static', filename='images/avatar.png') }}">
+    <link href="{{ url_for('static', filename='css/metro-bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/clean-blog.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/monokai_sublime.css') }}">
+    {%- endblock styles %}
+    {%- endblock head %}
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?b4bc94c62f4e0cf332ed24a2277e8049";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+
+  </head>
+  <body{% block body_attribs %}{% endblock body_attribs %}>
+    {% block body -%}
+    {% block navbar %}
+    <div id="wrapper">
+
+    <div class="navbar navbar-inverse navbar-side" role="navigation">
+          <div class="navbar-header" style="text-align:center">
+            <a href="{{ url_for('main.index') }}" class="image avatar"><img src="/static/img/avatar.png" alt="首页" /></a>
+            <h2>囧小平</h3>
+            <div style="margin-top: 30px; margin-bottom: 30px;">
+              <ul class="nav navbar-nav">
+                <h3><a href="{{ url_for('main.index') }}"><i class="fa fa-1x fa-home"></i><span>首页</span></a></h3>
+                <h3><a href="/blog/category/技术"><i class="fa fa-1x fa-user"></i><span>技术</span></a></h3>
+                <h3><a href="/blog/category/生活"><i class="fa fa-1x fa-coffee"></i><span>生活</span></a></h3>
+                <h3><a href="/blog/category/娱乐"><i class="fa fa-1x fa-gamepad"></i><span>娱乐</span></a></h3>
+                <h3><a href="/"><i class="fa fa-1x fa-university"></i><span>树莓</span></a></h3>
+              </ul>
+            </div>
+            <ul class="list-unstyled list-inline">
+              <a href="http://wpa.qq.com/msgrd?v=3&uin=375356447&site=qq&menu=yes"><i class="fa fa-2x fa-qq"></i></a>
+              <a href="http://weibo.com/375356447"><i class="fa fa-2x fa-weibo"></i></a>
+              <a href="mailto:yunxiyinzhe@gmail.com"><i class="fa fa-2x fa-envelope"></i></a>
+              <a href="https://github.com/yunxiyinzhe/"><i class="fa fa-2x fa-github"></i></a>
+            </ul>
+          </div>
+
+      </div>
+      </div>
+  	</div>
+
+    {%- endblock navbar %}
+    {% block content -%}
+    <div class="container">
+        {% block page_content %}{% endblock %}
+    </div>
+    {%- endblock content %}
+
+    {% block scripts %}
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/metro-docs.js"></script>
+    <script src="/static/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    {%- endblock scripts %}
+    {%- endblock body %}
+  </body>
+{%- endblock html %}
+</html>
+{% endblock doc -%}

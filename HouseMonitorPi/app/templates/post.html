@@ -1,0 +1,22 @@
+{% extends "blog_base.html" %}
+
+{% block page_content %}
+<div class="container">
+    <div class="page-header">
+      <h2> {{ post.title }} </h2>
+      <p class="post-meta fa fa-1x fa-calendar">{{ post.date }}</p>
+    </div>
+    <p>
+      {{ post.html|safe }}
+    </p>
+    <hr>
+    <ul class="list-unstyled list-inline">
+      {% for category in post.categories %}
+      <a a href="{{ url_for('.category', category=category) }}"><span class="label label-default fa fa-1x fa-book">{{ category }}</span></a>
+      {% endfor %}
+      {% for tag in post.tags %}
+      <a href="{{ url_for('.tag', tag=tag) }}"><span class="label label-info fa fa-1x fa-tag" >{{ tag }}</span></a>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

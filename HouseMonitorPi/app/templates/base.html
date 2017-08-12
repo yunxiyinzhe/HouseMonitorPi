@@ -1,0 +1,92 @@
+<!-- light-blue - v3.1.0 - 2014-12-06 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>树莓派家庭环境监控系统</title>
+    <link href="{{ url_for('static', filename = 'css/application.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="static/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta charset="utf-8">
+    <script>
+        /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
+           chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
+                      https://code.google.com/p/chromium/issues/detail?id=332189
+        */
+    </script>
+</head>
+<body class="background-dark">
+    <div class="logo">
+    <h2><a href=""><i class="fa fa-home fa-6"></i><strong>环境监控</strong></a></h2>
+    </div>
+    <nav id="sidebar" class="sidebar">
+        <ul id="side-nav" class="side-nav">
+            <li class="panel">
+                <a href="/"><i class="fa fa-user-circle"></i> <span class="name">概述</span></a>
+            </li>
+            <li class="panel">
+                <a href="temperature"><i class="fa fa-thermometer"></i> <span class="name">温度</span></a>
+            </li>
+            <li class="panel">
+                <a href="humidity"><i class="fa fa-tint"></i> <span class="name">湿度</span></a>
+            </li>
+            <li class="panel">
+                <a href="airquality"><i class="fa fa-area-chart"></i> <span class="name">空气</span></a>
+            </li>
+            <li class="panel">
+                <a href="formaldehyde"><i class="fa fa-tree"></i> <span class="name">甲醛</span></a>
+            </li>
+            <li class="panel">
+                <a href="blog"><i class="fa fa-wordpress"></i> <span class="name">博客</span></a>
+            </li>
+        </ul>
+
+        <div id="content_weather_forcast">
+            <h2><strong>Loading...</strong></h2>
+        </div>
+    </nav>
+    <div class="wrap">
+    <div class="content container">
+        {% block page_content %}
+        {% endblock %}
+    </div>
+    </div>
+</body>
+
+<!-- common libraries. required for every page-->
+<script src="static/lib/jquery/dist/jquery.min.js"></script>
+<script src="static/lib/jquery-pjax/jquery.pjax.js"></script>
+<script src="static/lib/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+<!-- common application js -->
+<script src="static/js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+<script src="static/js/utils.js"></script>
+<script src='static/js/Chart.min.js'></script>
+
+<script type="text/javascript">
+
+    var timerWeather=null;
+    clearInterval(timerWeather);
+    timerWeather = setInterval("getWeather()", 3600000);
+
+    function getWeather(){
+        $.ajax({
+            type :"GET",
+            url : "/weather_forcast",
+            dataType:"html",
+            success : function(data) {
+                $("#content_weather_forcast").html(data);
+            },
+            error:function(){
+                $("#content_weather_forcast").html("获取数据失败！");
+          }
+        });
+    }
+
+    getWeather()
+</script>
+
+</html>

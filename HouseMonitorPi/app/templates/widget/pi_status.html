@@ -1,0 +1,49 @@
+<section class="widget">
+    <header>
+        <h3>树莓派状态</h3>
+    </header>
+    <div class="body">
+        <ul class="server-stats">
+            <li>
+                <div class="key pull-right">CPU</div>
+                <div class="stat">
+                    <div class="info">
+                        <span class="label label-info">CPU占用率:{{pi_status['cpu_usage']}}%</span>
+                        <span class="label label-primary">CPU温度:{{pi_status['cpu_tmp']}}&deg;C</span>
+                    </div>
+                    <div class="progress progress-small">
+                        <div class="progress-bar progress-bar-danger" style="width: {{pi_status['cpu_usage']}}%;"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="key pull-right">内存</div>
+                <div class="stat">
+                    <div class="info">
+                        <span class="label label-success">
+                            内存使用:{{pi_status['ram_used']}}M/{{pi_status['ram_total']}}M
+                        </span>
+                    </div>
+                    <div class="progress progress-small">
+                        <div class="progress-bar" style="width: {{pi_status['ram_percentage']}}%;"></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="key pull-right">存储</div>
+                <div class="stat">
+                    <div class="info">
+                        <span class="label label-warning">
+                            内存使用:{{pi_status['disk_used']}}/{{pi_status['disk_total']}}
+                        </span>
+                    </div>
+                    <div class="progress progress-small">
+                        <div class="progress-bar progress-bar-inverse"
+                            style="width: {{pi_status['disk_percentage']}}%;">
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div id="content_weather_indoor">
+    <h2><strong>Loading...</strong></h2>
+</div>
+
+<div id="content_weather_outdoor">
+    <h2><strong>Loading...</strong></h2>
+</div>
+
+<div id="content_pi_status">
+    <h2><strong>Loading...</strong></h2>
+</div>
+
+<script type="text/javascript">
+    function getPiStatus(){
+        $.ajax({
+            type :"GET",
+            url : "/pi_status",
+            dataType:"html",
+            success : function(data) {
+                $("#content_pi_status").html(data);
+            },
+            error:function(){
+                $("#content_pi_status").html("获取数据失败！");
+          }
+        });
+    }
+
+    function getWeatherIndoor(){
+        $.ajax({
+            type :"GET",
+            url : "/weather_indoor",
+            dataType:"html",
+            success : function(data) {
+                $("#content_weather_indoor").html(data);
+            },
+            error:function(){
+                $("#content_weather_indoor").html("获取数据失败！");
+          }
+        });
+    }
+
+    function getWeatherOutdoor(){
+        $.ajax({
+            type :"GET",
+            url : "/weather_outdoor",
+            dataType:"html",
+            success : function(data) {
+                $("#content_weather_outdoor").html(data);
+            },
+            error:function(){
+                $("#content_weather_outdoor").html("获取数据失败！");
+          }
+        });
+    }
+    var timerPiStatus = null;
+    var timerWeatherIndoor = null;
+    var timerWeatherOutdoor = null;
+    window.onload = function(){
+        clearInterval(timerPiStatus);
+        clearInterval(timerWeatherIndoor);
+        clearInterval(timerWeatherOutdoor);
+        timerPiStatus = setInterval("getPiStatus()", 10000);
+        timerWeatherIndoor = setInterval("getWeatherIndoor()", 10000);
+        timerWeatherOutdoor = setInterval("getWeatherOutdoor()", 1800000);
+        getPiStatus();
+        getWeatherIndoor();
+        getWeatherOutdoor();
+    }
+    getPiStatus();
+    getWeatherIndoor();
+    getWeatherOutdoor();
+
+</script>
+
+{% endblock %}

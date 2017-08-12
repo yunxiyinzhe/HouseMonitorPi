@@ -1,0 +1,28 @@
+<section class="widget">
+    <header>
+        <h3>室内天气</h3>
+    </header>
+
+    <div class="body">
+        <table class="table table-striped no-margin">
+            <thead>
+            <tr>
+                <th>温度</th>
+                <th>湿度</th>
+                <th>PM2.5</th>
+                <th>PM10</th>
+                <th>甲醛</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong class="color-orange">{{weather_indoor['tmp']}}</strong></td>
+                <td><strong class="color-blue">{{weather_indoor['hum']}}</strong></td>
+                <td><strong class="color-green">{{weather_indoor['pm_2_5']}}</strong></td>
+                <td><strong class="color-green">{{weather_indoor['pm_10']}}</strong></td>
+                <td><strong class="color-lime">{{weather_indoor['CH2O']}}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% block page_content %}
+<section class="widget widget-tabs">
+    <header>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#day" data-toggle="tab">日视图</a>
+            </li>
+            <li>
+                <a href="#month" data-toggle="tab">月视图</a>
+            </li>
+            <li>
+                <a href="#year" data-toggle="tab">年视图</a>
+            </li>
+        </ul>
+    </header>
+    <script>Chart.defaults.global.defaultFontColor = 'darkgray';</script>
+    <div class="body tab-content">
+        <div id="day" class="tab-pane active clearfix">
+         <div>
+            <canvas id="canvas_day"></canvas>
+        </div>
+        <script>
+            function toDateString(time) {
+                return moment(time);
+            }
+            var color = Chart.helpers.color;
+            var i = 0;
+            var j = 0;
+            var value1_array =[];
+            var value2_array =[];
+            {% for value in values1_day %}
+                value1_array[value1_array.length] = {{value}};
+            {% endfor %}
+            {% for value in values2_day %}
+                value2_array[value2_array.length] = {{value}};
+            {% endfor %}
+            var config = {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: "PM2.5",
+                        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.red,
+                        fill: false,
+                        data: [{% for label in labels1_day %}
+                                    {x: toDateString("{{label}}"),
+                                     y: value1_array[i++]},
+                            {% endfor %}],
+                        }, {
+                        label: "PM10",
+                        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.blue,
+                        fill: false,
+                        data: [{% for label in labels2_day %}
+                                    {x: toDateString("{{label}}"),
+                                     y: value2_array[j++]},
+                            {% endfor %}],
+                        }]
+                },
+                options: {
+                    responsive: true,
+                    title:{
+                        display:true,
+                        text:"室内空气曲线"
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: "time",
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: '时间'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'PM2.5'
+                            }
+                        }]
+                    }
+                }
+            };
+            var ctx = document.getElementById("canvas_day").getContext("2d");
+            var myChart = new Chart(ctx, config);
+        </script>
+        </div>
+
+        <div id="month" class="tab-pane">
+        <div>
+            <canvas id="canvas_month"></canvas>
+        </div>
+        <script>
+            function toDateString(time) {
+                return moment(time);
+            }
+
+            var color = Chart.helpers.color;
+            var i = 0;
+            var j = 0;
+            var value1_array =[];
+            var value2_array =[];
+            {% for value in values1_month %}
+                value1_array[value1_array.length] = {{value}};
+            {% endfor %}
+            {% for value in values2_month %}
+                value2_array[value2_array.length] = {{value}};
+            {% endfor %}
+            var config = {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: "PM2.5",
+                        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.red,
+                        fill: false,
+                        data: [{% for label in labels1_month %}
+                                    {x: toDateString("{{label}}"),
+                                     y: value1_array[i++]},
+                            {% endfor %}],
+                        }, {
+                        label: "PM10",
+                        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.blue,
+                        fill: false,
+                        data: [{% for label in labels2_month %}
+                                    {x: toDateString("{{label}}"),
+                                     y: value2_array[i++]},
+                            {% endfor %}],
+                        }]
+                },
+                options: {
+                    responsive: true,
+                    title:{
+                        display:true,
+                        text:"室内空气曲线"
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: "time",
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: '时间'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'PM2.5'
+                            }
+                        }]
+                    }
+                }
+            };
+            var ctx = document.getElementById("canvas_month").getContext("2d");
+            var myChart = new Chart(ctx, config);
+        </script>
+        </div>
+        <div id="year" class="tab-pane">
+        <div>
+            <canvas id="canvas_year"></canvas>
+        </div>
+        <script>
+            function toDateString(time) {
+                return moment(time);
+            }
+
+            var color = Chart.helpers.color;
+            var i = 0;
+            var j = 0;
+            var value1_array =[];
+            var value2_array =[];
+            {% for value in values1_year %}
+                value1_array[value1_array.length] = {{value}};
+            {% endfor %}
+            {% for value in values2_year %}
+                value2_array[value2_array.length] = {{value}};
+            {% endfor %}
+            var config = {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: "PM2.5",
+                        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.red,
+                        fill: false,
+                        data: [{% for label in labels1_year %}
+                                    {x: toDateString("{{label}}"),
+                                     y: value1_array[i++]},
+                            {% endfor %}],
+                        }, {
+                        label: "PM10",
+                        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.blue,
+                        fill: false,
+                        data: [{% for label in labels2_year %}
+                                    {x: toDateString("{{label}}"),
+                                     y: value2_array[i++]},
+                            {% endfor %}],
+                        }]
+                },
+                options: {
+                    responsive: true,
+                    title:{
+                        display:true,
+                        text:"室内空气曲线"
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: "time",
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: '时间'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'PM2.5'
+                            }
+                        }]
+                    }
+                }
+            };
+            var ctx = document.getElementById("canvas_year").getContext("2d");
+            var myChart = new Chart(ctx, config);
+        </script>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

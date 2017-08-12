@@ -1,0 +1,25 @@
+{% extends "blog_base.html" %}
+{% block title %}Dylan Gao{% endblock %}
+
+{% block page_content %}
+<div class="container" style="margin-top: 30px;">
+    {% for post in posts %}
+      <div class="post-preview">
+        <h2 class="post-title"><a href="{{ url_for('.post', path=post.path) }}">{{ post.title }}</a></h2>
+        <div class="panel-body">
+          <ul class="list-unstyled list-inline">
+            {% for category in post.categories %}
+            <a a href="{{ url_for('.category', category=category) }}"><span class="label label-default fa fa-1x fa-book">{{ category }}</span></a>
+            {% endfor %}
+            {% for tag in post.tags %}
+            <a href="{{ url_for('.tag', tag=tag) }}"><span class="label label-info fa fa-1x fa-tag" >{{ tag }}</span></a>
+            {% endfor %}
+          </ul>
+          <div class="post-meta fa fa-1x fa-calendar">{{ post.date }}</div>
+        </div>
+      </div>
+      <hr>
+    {% endfor %}
+    {{ pagination.links }}
+</div>
+{% endblock %}
